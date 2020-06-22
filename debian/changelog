@@ -1,0 +1,18 @@
+sddm-modified-init (20.06.03) mx; urgency=medium
+
+  * only do restart of sddm if sysVinit is init
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Jun 2020 20:02:43 -0400
+
+sddm-modified-init (20.06.02) mx; urgency=medium
+
+  * changes to work with tsplash
+  * changes because sddm path isn't the same as roots 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 21 Jun 2020 19:53:15 -0400
+
+sddm-modified-init (20.06.01) mx; urgency=medium
+
+  * Initial release
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 20 Jun 2020 21:22:14 -0400

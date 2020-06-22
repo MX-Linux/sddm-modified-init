@@ -1,0 +1,11 @@
+Source: sddm-modified-init
+Section: system
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.8
+
+Package: sddm-modified-init
+Architecture: all
+Depends:
+Description: modified sddm init script for mx and antiX linux

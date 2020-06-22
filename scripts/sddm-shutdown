@@ -1,0 +1,16 @@
+#!/bin/bash
+
+##script to shutdown sddm if runlevel = 6 or 0
+
+if [ ! /proc/1/exe -ef /usr/lib/systemd/systemd ]; then
+    current_run_level=$(/sbin/runlevel |/usr/bin/cut -d' ' -f2)
+    touch /etc/current_run_level
+    echo $current_run_level>/etc/current_run_level
+	if [ "$current_run_level" = "6" -o "$current_run_level" = "0" ]; then
+		echo "$current_run_level">>/etc/current_run_level
+		#chvt 7
+		service sddm stop
+		exit 0
+	fi
+fi
+exit 0

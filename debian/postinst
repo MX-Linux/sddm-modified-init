@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# postinst script for lightdm-modified-init
+
+#set -e
+
+case "$1" in
+  install|upgrade) update-rc.d sddm remove
+				   update-rc.d sddm defaults
+                   ;;
+
+                *) :
+                   ;;
+esac 
+
+exit 0

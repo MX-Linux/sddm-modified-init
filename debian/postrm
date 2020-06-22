@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#DEBHELPER#
+
+# postrm script for lightdm-modified-init
+
+#set -e
+
+case "$1" in
+  purge|remove) dpkg-divert --quiet                                               \
+                            --remove                                              \
+                            --package sddm-modified-init               \
+                            --rename       \
+                            --divert /etc/init.d/sddm.dpkg-distrib \
+                            /etc/init.d/sddm
+                            
+                dpkg-divert --quiet                                               \
+                            --remove                                              \
+                            --package sddm-modified-init               \
+                            --rename       \
+                            --divert /usr/share/sddm/scripts/Xsetup.dpkg-distrib \
+                            /usr/share/sddm/scripts/Xsetup
+                            
+                dpkg-divert --quiet                                               \
+                            --remove                                              \
+                            --package sddm-modified-init               \
+                            --rename       \
+                            --divert /usr/share/sddm/scripts/Xstop.dpkg-distrib \
+                            /usr/share/sddm/scripts/Xstop                        
+                            
+                ;;
+
+             *) :
+                ;;
+esac 
+
+exit 0
