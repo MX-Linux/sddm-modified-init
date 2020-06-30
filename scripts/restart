@@ -1,0 +1,7 @@
+#!/bin/bash
+
+    
+    chvt 8
+    sleep 2
+    pkill sddm
+    /usr/sbin/service sddm restart

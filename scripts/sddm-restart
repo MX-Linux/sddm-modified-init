@@ -1,5 +1,0 @@
-#!/bin/bash
-
-    sleep 1
-    pkill kwin_x11
-    /usr/sbin/service sddm restart 

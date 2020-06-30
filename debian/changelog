@@ -1,3 +1,15 @@
+sddm-modified-init (20.06.06) mx; urgency=medium
+
+  * kill everything before restart 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Mon, 29 Jun 2020 23:16:58 -0400
+
+sddm-modified-init (20.06.05) mx; urgency=medium
+
+  *  hide restart a little
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sat, 27 Jun 2020 20:14:01 -0400
+
 sddm-modified-init (20.06.04) mx; urgency=medium
 
   * modified sddm-restart to kill extra kwin session 
