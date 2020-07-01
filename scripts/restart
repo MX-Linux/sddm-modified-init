@@ -4,4 +4,5 @@
     chvt 8
     sleep 2
     pkill sddm
+    sleep 1
     /usr/sbin/service sddm restart
