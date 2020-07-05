@@ -6,3 +6,4 @@
     pkill sddm
     sleep 1
     /usr/sbin/service sddm restart
+    pkill xmessage

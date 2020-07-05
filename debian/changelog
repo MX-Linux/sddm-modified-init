@@ -1,3 +1,9 @@
+sddm-modified-init (20.07.01) mx; urgency=medium
+
+  * remove bogus xmessage 
+
+ -- Dolphin Oracle <dolphin@littlebyte>  Sun, 05 Jul 2020 19:25:21 -0400
+
 sddm-modified-init (20.06.06) mx; urgency=medium
 
   * kill everything before restart 
