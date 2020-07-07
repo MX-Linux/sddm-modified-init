@@ -1,2 +1,3 @@
 sddm  etc/init.d
+oosddm etc/init.d
 scripts/*  usr/share/sddm/scripts

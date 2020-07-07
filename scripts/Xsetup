@@ -1,14 +1,5 @@
 #!/bin/sh
 # Xsetup - run as root before the login dialog appears
 
-restart the first time
-if [ ! /proc/1/exe -ef /usr/lib/systemd/systemd ]; then
-    if [ ! -e "/tmp/sddm-chk" ]; then
-        touch "/tmp/sddm-chk"
-        #chvt 8
-        /usr/share/sddm/scripts/restart &
-    fi
-fi
-
 exit 0
 

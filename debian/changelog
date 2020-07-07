@@ -1,3 +1,16 @@
+sddm-modified-init (20.07.02) mx; urgency=medium
+
+  [ fehlix ]
+  * added oosddm init-script with start stop of sddm
+  * adjusted and disabled restart for live session
+  
+  [dolphin oracle]
+  * adjust maintainer scripts
+  * add exit if sddm is not enabled
+  * adjust start values to ignore DM other than sddm
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Mon, 06 Jul 2020 19:46:44 +0200
+
 sddm-modified-init (20.07.01) mx; urgency=medium
 
   * remove bogus xmessage 

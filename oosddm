@@ -1,0 +1,55 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          oosddm
+# Should-Start:      console-screen kbd acpid dbus hal consolekit
+# Required-Start:    $local_fs $remote_fs x11-common
+# Required-Stop:     $local_fs $remote_fs
+# X-Start-Before:    sddm
+# Default-Start:     5
+# Default-Stop:      0 1 6
+# Short-Description: OOSDDM
+# Description:       Debian init script for the SDDM Out-of-Box Experience
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# don't run in systemd
+if [ /proc/1/exe -ef /usr/lib/systemd/systemd ]; then
+   exit 0
+fi
+
+# don't run when oobe is enabled in runlevel 5
+if ls /etc/rc5.d/S??oobe 2>/dev/null 1>/dev/null; then
+   exit 0
+fi
+
+# don't run if sddm is not enabled in run level 5 or the default display mananger
+if [ -e "/etc/X11/default-display-manager" ] && [ "$(basename $(cat /etc/X11/default-display-manager))" != "sddm" ]; then
+	         exit 0
+fi	         
+	        
+if ls /etc/rc5.d/S??sddm 2>/dev/null 1>/dev/null; then
+   exit 0
+fi
+
+#startup
+case "$1" in
+  start)
+    if [ -d /live/linux ]; then
+       # Boot will hold here since the process is not being forked.
+       echo ">>> Preparing system..."
+       startx /usr/bin/sleep 1  2>/dev/null || :
+       # Boot will continue after X exits.
+    else
+       # temporary disable autologin
+       cp -f /etc/sddm.conf  /etc/sddm.conf.oosddm 
+       sed -i -e 's/^User=.*/User=/' /etc/sddm.conf 
+       service sddm start 
+       sleep 1
+       service sddm stop
+       cp -f /etc/sddm.conf.oosddm /etc/sddm.conf 
+       rm -f /etc/sddm.conf.oosddm
+    fi
+    ;;
+esac
+exit 0
