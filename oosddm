@@ -28,10 +28,6 @@ if [ -e "/etc/X11/default-display-manager" ] && [ "$(basename $(cat /etc/X11/def
 	         exit 0
 fi	         
 	        
-if ls /etc/rc5.d/S??sddm 2>/dev/null 1>/dev/null; then
-   exit 0
-fi
-
 #startup
 case "$1" in
   start)
