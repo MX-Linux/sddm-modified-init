@@ -7,7 +7,7 @@
 #set -e
 
 case "$1" in
-  install|upgrade) update-rc.d sddm remove
+  install|upgrade|configure) update-rc.d sddm remove
                    update-rc.d sddm defaults
                    update-rc.d oosddm remove
                    #update-rc.d oosddm defaults
