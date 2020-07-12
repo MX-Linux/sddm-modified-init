@@ -1,11 +1,14 @@
+sddm-modified-init (20.07.04) mx; urgency=medium
+
+  * revise maintainer scripts 
+
+ -- dolphin oracle <dolphinoracle@gmail.com>  Sun, 12 Jul 2020 10:53:19 -0400
+
 sddm-modified-init (20.07.03) mx; urgency=medium
 
   [ fehlix ]
   * rework sddm init-script
   * removed oosddm
-  
-  [ dolphin ]
-  * revise maintainer scripts
  
  -- fehlix <fehlix@mx-linux.org>  Sun, 12 Jul 2020 01:17:22 +0200
 
