@@ -26,7 +26,10 @@ case "$1" in
                             --package sddm-modified-init               \
                             --rename       \
                             --divert /usr/share/sddm/scripts/Xstop.dpkg-distrib \
-                            /usr/share/sddm/scripts/Xstop                        
+                            /usr/share/sddm/scripts/Xstop      
+                            
+                            update-rc.d sddm remove
+							update-rc.d oosddm remove                  
                             
                 ;;
 
