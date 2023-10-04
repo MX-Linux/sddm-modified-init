@@ -3,8 +3,6 @@
 if [ true != "$INIT_D_SCRIPT_SOURCED" ] ; then
     set "$0" "$@"; INIT_D_SCRIPT_SOURCED=true . /lib/init/init-d-script
 fi
-# this script supplied by sddm-modified-init package
-
 ### BEGIN INIT INFO
 # Provides:          sddm
 # Should-Start:      dbus
@@ -29,13 +27,22 @@ DEFAULT_DISPLAY_MANAGER_FILE=/etc/X11/default-display-manager
 
 DESC="Init script for Simple Desktop Display Manager"
 DAEMON=/usr/bin/sddm
-NAME=sddm
 START_ARGS='--background --make-pidfile'
+
+# don't run in systemd
+[ /proc/1/exe -ef /usr/lib/systemd/systemd ] &&  exit 0
+
+#start systemd-logind if exists
+if ! pgrep -x systemd-logind >/dev/null; then  
+	if [ -e /usr/lib/systemd/systemd-logind ]; then
+   		mkdir -p /run/systemd/seats
+  		/usr/lib/systemd/systemd-logind 2>/dev/null & 
+	fi
+fi
 
 #
 # Function that starts the daemon/service
 #
-
 do_start_override()
 {
 	if grep -wqs text /proc/cmdline; then
@@ -49,59 +56,6 @@ do_start_override()
 		[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
 		# Wait for plymouth if running
 		[ -x /bin/plymouth ] && /bin/plymouth quit
-
-        # chvt 8
-		call do_start_cmd
-		case "$?" in
-		  0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		  2)   [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-		esac
-        
-        # don't run in systemd
-        [ /proc/1/exe -ef /usr/lib/systemd/systemd ] &&  exit 0
-
-        # don't run when oobe is enabled in runlevel 5
-        ls /etc/rc5.d/S??oobe 2>/dev/null 1>/dev/null && exit 0
-
-		chvt 8
-        if [ -f /etc/sddm.conf.oosddm ]; then
-           rm   /etc/sddm.conf.oosddm 
-        fi
-        # temporary disable autologin
-        if grep -sq -E '^User=[[:alnum:]_]+' /etc/sddm.conf; then
-           cp -f /etc/sddm.conf  /etc/sddm.conf.oosddm 
-           sed -i -e 's/^User=.*/User=/' /etc/sddm.conf
-        fi
-
-		# wait until greeter shows up
-		i=0
-        while [ $i -lt 50 ]; do
-           i=$(($i+1))
-           pgrep -u sddm -x sddm-greeter >/dev/null && break
-           sleep 0.3;
-        done
-        # get sddm-greeter authentication-socket
-        #AS=$(pgrep -a -x sddm-helper | grep -oE '/tmp/sddm-auth[^[:blank:]]+' 2>/dev/null)
-                
-		sleep 1 
-		[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
-		call do_stop_cmd
-		case "$?" in
-		  0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		  2)   [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-		esac
-		chvt 8
-        sleep 1
-        # re-enable autologin if any 
-        if [  -f /etc/sddm.conf.oosddm ]; then
-           cp -f /etc/sddm.conf.oosddm /etc/sddm.conf 
-           rm -f /etc/sddm.conf.oosddm
-        fi
-        # remove left-over sddm-greeter authentication-socket
-        #[  -n "$AS" ] && [ -e "$AS" ] rm -f "$AS"
-        rm -f /tmp/sddm-auth* 
-        
-		[ "$VERBOSE" != no ] && log_daemon_msg "Re-Starting $DESC" "$NAME"
 		call do_start_cmd
 		case "$?" in
 		  0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
@@ -109,6 +63,7 @@ do_start_override()
 		esac
 	fi
 }
+
 case "$1" in
   start);;
   stop)tsplash="/live/bin/tsplash"

@@ -1,3 +1,9 @@
+sddm-modified-init (23.10.01) mx; urgency=medium
+
+  * launch systemd-logind before sddm have buttons working.
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 04 Oct 2023 19:52:40 -0400
+
 sddm-modified-init (20.07.04) mx; urgency=medium
 
   * revise maintainer scripts 

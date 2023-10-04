@@ -2,7 +2,7 @@
 
 #DEBHELPER#
 
-# postinst script for lightdm-modified-init
+# postinst script for sddm-modified-init
 
 #set -e
 
