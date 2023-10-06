@@ -1,7 +1,7 @@
 sddm-modified-init (23.10.02) mx; urgency=medium
 
   * add hibernation check environemnt variable
-  * allows hibernation to work with swapfiles 
+  * allows hibernation to work with swapfiles on luks
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Oct 2023 22:30:28 -0400
 
