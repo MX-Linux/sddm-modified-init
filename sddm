@@ -29,16 +29,19 @@ DESC="Init script for Simple Desktop Display Manager"
 DAEMON=/usr/bin/sddm
 START_ARGS='--background --make-pidfile'
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # don't run in systemd
 [ /proc/1/exe -ef /usr/lib/systemd/systemd ] &&  exit 0
 
 #start systemd-logind if exists
 if ! pgrep -x systemd-logind >/dev/null; then  
-	if [ -e /usr/lib/systemd/systemd-logind ]; then
-   		mkdir -p /run/systemd/seats
-  		/usr/lib/systemd/systemd-logind 2>/dev/null & 
-	fi
+    if [ -x /usr/lib/systemd/systemd-logind ]; then
+        mkdir -p /run/systemd/seats  2>/dev/null || :
+        export SYSTEMD_BYPASS_HIBERNATION_MEMORY_CHECK=1
+        /usr/lib/systemd/systemd-logind 2>/dev/null & 
+    fi
 fi
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #
 # Function that starts the daemon/service

@@ -1,3 +1,10 @@
+sddm-modified-init (23.10.02) mx; urgency=medium
+
+  * add hibernation check environemnt variable
+  * allows hibernation to work with swapfiles 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 05 Oct 2023 22:30:28 -0400
+
 sddm-modified-init (23.10.01) mx; urgency=medium
 
   * launch systemd-logind before sddm have buttons working.
