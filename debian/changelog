@@ -1,3 +1,10 @@
+sddm-modified-init (24.02.01) mx; urgency=medium
+
+  * test deb
+  * don't shutdown plymouth ahead of plymouth's regular shudown
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 08 Feb 2024 19:37:23 -0500
+
 sddm-modified-init (23.10.02) mx; urgency=medium
 
   * add hibernation check environemnt variable
