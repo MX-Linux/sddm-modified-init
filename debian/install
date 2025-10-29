@@ -1,3 +1,4 @@
 sddm  etc/init.d
+sddm usr/share/sddm-modified-defaults
 #oosddm etc/init.d
 scripts/*  usr/share/sddm/scripts

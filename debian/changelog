@@ -1,3 +1,9 @@
+sddm-modified-init (25.10.01) mx; urgency=medium
+
+  * don't start systemd-logind if elogind is present
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Tue, 28 Oct 2025 21:19:53 -0400
+
 sddm-modified-init (24.10.01) mx; urgency=medium
 
   * switch vt before killing plymouth, before display manager

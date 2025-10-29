@@ -34,11 +34,14 @@ START_ARGS='--background --make-pidfile'
 [ /proc/1/exe -ef /usr/lib/systemd/systemd ] &&  exit 0
 
 #start systemd-logind if exists
-if ! pgrep -x systemd-logind >/dev/null; then  
-    if [ -x /usr/lib/systemd/systemd-logind ]; then
-        mkdir -p /run/systemd/seats  2>/dev/null || :
-        export SYSTEMD_BYPASS_HIBERNATION_MEMORY_CHECK=1
-        /usr/lib/systemd/systemd-logind 2>/dev/null & 
+#don't start if elogind exists, presuming elogind will be started by init.d/elogind
+if [ ! -x /usr/libexec/elogind ]; then
+	if ! pgrep -x systemd-logind >/dev/null; then  
+    	if [ -x /usr/lib/systemd/systemd-logind ]; then
+       	 mkdir -p /run/systemd/seats  2>/dev/null || :
+        	export SYSTEMD_BYPASS_HIBERNATION_MEMORY_CHECK=1
+        	/usr/lib/systemd/systemd-logind 2>/dev/null & 
+    	fi
     fi
 fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

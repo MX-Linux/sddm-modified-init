@@ -7,7 +7,12 @@
 #set -e
 
 case "$1" in
-  install|upgrade|configure) update-rc.d sddm remove
+  install|upgrade|configure) 
+                   #copy in if removed by something else debian does
+                   if [ ! -e /etc/init.d/sddm ]; then
+                   	cp /usr/share/sddm-modified-defaults/sddm /etc/init.d/sddm
+                   fi
+                   update-rc.d sddm remove
                    update-rc.d sddm defaults
                    update-rc.d oosddm remove
                    #update-rc.d oosddm defaults
